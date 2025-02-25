@@ -1,0 +1,37 @@
+.custom-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  
+  &.primary {
+    background-color: #0066cc;
+    color: #ffffff;
+    
+    &:hover {
+      background-color: #0055aa;
+    }
+  }
+  
+  &.secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+  
+  &.outline {
+    background-color: transparent;
+    border: 2px solid #0066cc;
+    color: #0066cc;
+    
+    &:hover {
+      background-color: rgba(0, 102, 204, 0.1);
+    }
+  }
+} 
