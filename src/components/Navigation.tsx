@@ -11,7 +11,7 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen, onClose }) => {
 
   const menuGroups = {
     main: [
-      { id: 1, text: 'Modelos', isActive: true },
+      { id: 1, text: 'Modelos'},
       { id: 2, text: 'Servicios y Accesorios' },
       { id: 3, text: 'Financiación' },
       { id: 4, text: 'Reviews y Comunidad' }
