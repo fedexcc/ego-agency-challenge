@@ -8,14 +8,22 @@ import '../styles/Models.scss';
 const Models: React.FC = () => {
     const navigate = useNavigate();
     const [models, setModels] = useState<ModelBasic[]>([]);
+    const [filteredModels, setFilteredModels] = useState<ModelBasic[]>([]);
+    const [selectedFilter, setSelectedFilter] = useState('Todos');
+    const [selectedOrder, setSelectedOrder] = useState('Nada');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [availableSegments, setAvailableSegments] = useState<string[]>(['Todos']);
 
     useEffect(() => {
         const fetchModels = async () => {
             try {
                 const data = await modelService.getAllModels();
                 setModels(data);
+                setFilteredModels(data);
+                // Extraer segmentos únicos y agregar 'Todos'
+                const segments = ['Todos', ...new Set(data.map(model => model.segment))];
+                setAvailableSegments(segments);
                 setLoading(false);
             } catch (err) {
                 console.error('Error fetching models:', err);
@@ -27,6 +35,37 @@ const Models: React.FC = () => {
         fetchModels();
     }, []);
 
+    useEffect(() => {
+        let result = [...models];
+        
+        // Aplicar filtro por segmento
+        if (selectedFilter !== 'Todos') {
+            result = result.filter(model => model.segment === selectedFilter);
+        }
+
+        // Aplicar ordenamiento
+        const orderText = selectedOrder.toString();
+        switch (orderText) {
+            case 'De menor a mayor precio':
+                result.sort((a, b) => a.price - b.price);
+                break;
+            case 'De mayor a menor precio':
+                result.sort((a, b) => b.price - a.price);
+                break;
+            case 'Más nuevos primero':
+                result.sort((a, b) => b.year - a.year);
+                break;
+            case 'Más viejos primero':
+                result.sort((a, b) => a.year - b.year);
+                break;
+            default: // 'Nada'
+                // No aplicamos ningún ordenamiento
+                break;
+        }
+
+        setFilteredModels(result);
+    }, [selectedFilter, selectedOrder, models]);
+
     const handleModelClick = (modelId: number) => {
         navigate(`/modelos/ficha-tecnica/${modelId}`);
     };
@@ -37,9 +76,15 @@ const Models: React.FC = () => {
     return (
         <div className="models-container">
             <h1>Descubrí todos los modelos</h1>
-            <FilterSection />
+            <FilterSection 
+                onFilterChange={setSelectedFilter} 
+                selectedFilter={selectedFilter}
+                filterOptions={availableSegments}
+                selectedOrder={selectedOrder}
+                onOrderChange={setSelectedOrder}
+            />
             <div className="models-grid">
-                {models.map((model) => (
+                {filteredModels.map((model) => (
                     <div
                         key={model.id}
                         className="model-card"
@@ -72,7 +117,7 @@ const Models: React.FC = () => {
                             <Button
                                 variant="inverted"
                                 onClick={(e) => {
-                                    e.stopPropagation(); // Evita que el click se propague al contenedor
+                                    e.stopPropagation();
                                     handleModelClick(model.id);
                                 }}
                             >

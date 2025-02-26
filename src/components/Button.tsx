@@ -4,7 +4,7 @@ import '../styles/Button.scss';
 interface ButtonProps {
   children: React.ReactNode;
   variant?: 'default' | 'inverted' | 'large';
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 
