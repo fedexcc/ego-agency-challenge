@@ -26,9 +26,7 @@ const TechSpecs: React.FC = () => {
       }
       
       try {
-        console.log('Fetching model details for ID:', modelId);
         const data = await modelService.getModelById(modelId);
-        console.log('Received model details:', data);
         setModelDetails(data);
         setLoading(false);
       } catch (err) {
