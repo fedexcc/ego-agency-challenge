@@ -1,37 +1,51 @@
-.custom-button {
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 16px;
+@import './_variables';
+
+.btn {
+  position: relative;
+  width: 152px;
+  height: 34px;
+  box-sizing: border-box;
+  border: 2px solid #191919;
+  border-radius: 40px;
+  background: transparent;
   cursor: pointer;
+  font-family: 'ToyotaType', sans-serif;
+  font-size: 13px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: 0.073125px;
+  color: #191919;
   transition: all 0.3s ease;
-  border: none;
-  
-  &.primary {
-    background-color: #0066cc;
-    color: #ffffff;
-    
-    &:hover {
-      background-color: #0055aa;
-    }
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+
+  &:focus {
+    outline: none;
   }
-  
-  &.secondary {
-    background-color: #6c757d;
-    color: #ffffff;
-    
-    &:hover {
-      background-color: #5a6268;
-    }
+
+  &:focus-visible {
+    outline: none;
   }
-  
-  &.outline {
-    background-color: transparent;
-    border: 2px solid #0066cc;
-    color: #0066cc;
-    
-    &:hover {
-      background-color: rgba(0, 102, 204, 0.1);
-    }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover {
+    color: #EB0A1E;
+  }
+
+  &.inverted {
+    background: #191919;
+    color: #FFFFFF;
+    border-color: #191919;
+  }
+
+  &.large {
+    width: 195px;
   }
 } 

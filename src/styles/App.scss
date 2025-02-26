@@ -1,4 +1,28 @@
-@import 'variables';
+@import './_variables';
+@import './_typography';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Remove focus outlines globally
+*:focus {
+  outline: none;
+}
+
+button:focus,
+select:focus,
+input:focus,
+a:focus {
+  outline: none;
+}
+
+// Remove tap highlight on mobile
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 
 #root {
   margin: 0;
@@ -16,6 +40,7 @@
   padding-top: $topbar-height;
   min-height: calc(100vh - $topbar-height);
   padding: 150px;
+  position: relative;
 }
 
 .logo {
