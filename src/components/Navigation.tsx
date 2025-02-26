@@ -51,7 +51,7 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen, onClose }) => {
         <div className="navigation-items">
           <ul className="menu-group">
             {menuGroups.main.map((item) => (
-              <li key={item.id} className={'menu-item'}>
+              <li key={item.id} className={'menu-item'} onClick={onClose}>
                 {item.text}
               </li>
             ))}
@@ -59,7 +59,7 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen, onClose }) => {
           <div className="separator" />
           <ul className="menu-group">
             {menuGroups.toyota.map((item) => (
-              <li key={item.id} className="menu-item">
+              <li key={item.id} className="menu-item" onClick={onClose}>
                 {item.text}
               </li>
             ))}
@@ -67,14 +67,14 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen, onClose }) => {
           <div className="separator" />
           <ul className="menu-group">
             {menuGroups.services.map((item) => (
-              <li key={item.id} className="menu-item">
+              <li key={item.id} className="menu-item" onClick={onClose}>
                 {item.text}
               </li>
             ))}
           </ul>
           <ul className="menu-group secondary">
             {menuGroups.info.map((item) => (
-              <li key={item.id} className="menu-item">
+              <li key={item.id} className="menu-item" onClick={onClose}>
                 {item.text}
               </li>
             ))}
