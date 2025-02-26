@@ -51,7 +51,7 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen, onClose }) => {
         <div className="navigation-items">
           <ul className="menu-group">
             {menuGroups.main.map((item) => (
-              <li key={item.id} className={`menu-item ${item.isActive ? 'active' : ''}`}>
+              <li key={item.id} className={'menu-item'}>
                 {item.text}
               </li>
             ))}
