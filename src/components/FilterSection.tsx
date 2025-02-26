@@ -4,6 +4,7 @@ import '../styles/FilterSection.scss';
 const FilterSection: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState('De menor a mayor precio');
+  const [selectedFilter, setSelectedFilter] = useState('Todos');
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
 
@@ -51,8 +52,9 @@ const FilterSection: React.FC = () => {
                 {filterOptions.map((option) => (
                   <button
                     key={option}
-                    className={`dropdown-item ${option === 'Todos' ? 'active' : ''}`}
+                    className={`dropdown-item ${selectedFilter === option ? 'active' : ''}`}
                     onClick={() => {
+                      setSelectedFilter(option);
                       setIsFilterDropdownOpen(false);
                     }}
                   >
@@ -64,10 +66,15 @@ const FilterSection: React.FC = () => {
           </div>
         ) : (
           <div className="filter-options">
-            <button className="filter-option active">Todos</button>
-            <button className="filter-option">Autos</button>
-            <button className="filter-option">Pickups y Comerciales</button>
-            <button className="filter-option">SUVs y Crossovers</button>
+            {filterOptions.map((option) => (
+              <button
+                key={option}
+                className={`filter-option ${selectedFilter === option ? 'active' : ''}`}
+                onClick={() => setSelectedFilter(option)}
+              >
+                {option}
+              </button>
+            ))}
           </div>
         )}
       </div>
