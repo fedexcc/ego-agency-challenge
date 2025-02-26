@@ -43,7 +43,7 @@ const TechSpecs: React.FC = () => {
     fetchModelDetails();
   }, [id]);
 
-  if (loading) return <div className="loading">Cargando detalles...</div>;
+  if (loading) return <div className="loading"></div>;
   if (error) return (
     <div className="error-container">
       <div className="error">{error}</div>

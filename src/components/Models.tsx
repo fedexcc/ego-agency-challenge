@@ -70,7 +70,7 @@ const Models: React.FC = () => {
         navigate(`/modelos/ficha-tecnica/${modelId}`);
     };
 
-    if (loading) return <div className="loading">Cargando modelos...</div>;
+    if (loading) return <div className="loading"></div>;
     if (error) return <div className="error">{error}</div>;
 
     return (

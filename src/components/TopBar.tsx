@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/TopBar.scss';
 import Logo from '../assets/images/Logo.svg';
 import MenuIcon from '../assets/menu/icon/Gray.svg';
 import Navigation from './Navigation';
+import '../styles/TopBar.scss';
 
 interface TopBarProps {
   children?: React.ReactNode;
@@ -19,9 +21,9 @@ const TopBar: React.FC<TopBarProps> = ({ children }) => {
         <div className="topbar-content">
           {children || (
             <>
-              <div className="logo-container">
+              <Link to="/" className="logo-container">
                 <img src={Logo} alt="EGO Logo" className="logo-image" />
-              </div>
+              </Link>
               <div className="menu-container" onClick={toggleMenu}>
                 <span className="menu-text">Menú</span>
                 <img src={MenuIcon} alt="Menu" className="menu-icon" />
