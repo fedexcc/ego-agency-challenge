@@ -9,6 +9,7 @@
   margin-bottom: 56px;
   padding: 18px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
 
   @media (max-width: 768px) {
     flex-direction: row;
@@ -30,13 +31,19 @@
 
     .order-container {
       .custom-dropdown {
+        position: static;
+        
         .dropdown-toggle {
           min-width: 280px;
           padding: 8px 16px;
         }
 
         .dropdown-menu {
-          min-width: 160px;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          max-width: 320px;
+          top: 100%;
         }
       }
     }
