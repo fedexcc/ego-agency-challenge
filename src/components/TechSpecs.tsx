@@ -52,10 +52,15 @@ const TechSpecs: React.FC = () => {
 
   return (
     <div className="tech-specs-container">
-      <div className="model-header">
-        <h1>{modelDetails.name}</h1>
-        <p className="model-title">{modelDetails.title}</p>
-        <div className="model-description" dangerouslySetInnerHTML={{ __html: modelDetails.description }} />
+      <div className="model-hero">
+        <div className="model-image">
+          <img src={modelDetails.photo} alt={modelDetails.name} />
+        </div>
+        <div className="model-content">
+          <p className="model-name">{modelDetails.name}</p>
+          <h1 className="model-title">{modelDetails.title}</h1>
+          <div className="model-description" dangerouslySetInnerHTML={{ __html: modelDetails.description }} />
+        </div>
       </div>
 
       <div className="features-section">
