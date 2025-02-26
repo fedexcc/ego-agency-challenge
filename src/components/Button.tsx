@@ -2,22 +2,26 @@ import React from 'react';
 import '../styles/Button.scss';
 
 interface ButtonProps {
-  text: string;
+  children: React.ReactNode;
+  variant?: 'default' | 'inverted' | 'large';
   onClick?: () => void;
-  variant?: 'primary' | 'secondary' | 'outline';
+  className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({ 
-  text, 
-  onClick, 
-  variant = 'primary' 
+  children, 
+  variant = 'default',
+  onClick,
+  className = ''
 }) => {
+  const buttonClasses = `btn ${variant} ${className}`.trim();
+
   return (
     <button 
-      className={`custom-button ${variant}`} 
+      className={buttonClasses}
       onClick={onClick}
     >
-      {text}
+      {children}
     </button>
   );
 };

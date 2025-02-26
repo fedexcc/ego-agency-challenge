@@ -1,0 +1,138 @@
+@import './_variables';
+@import './_typography';
+
+.models-container {
+  padding: 0 120px;
+  margin: 48px 0;
+
+  @media (max-width: 768px) {
+    padding: 0 16px;
+  }
+
+  h1 {
+    font-family: $font-family-primary;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 32px;
+    color: #373737;
+  }
+
+  .loading, .error {
+    text-align: center;
+    padding: 40px;
+    font-family: $font-family-primary;
+    font-size: 18px;
+    color: #373737;
+  }
+
+  .error {
+    color: #dc3545;
+  }
+
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+
+    .model-card {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 768px) {
+        &:active {
+          .model-name {
+            color: #EB0A1E;
+          }
+        }
+      }
+
+      .model-image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .model-name {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 30px;
+        letter-spacing: 0;
+        text-align: center;
+        color: #373737;
+        margin: 16px 0;
+        padding: 0 16px;
+        transition: color 0.2s ease;
+      }
+
+      .model-info {
+        padding: 0 16px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .model-details {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+
+          .model-year,
+          .model-price {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17.07px;
+            letter-spacing: -0.28px;
+            text-align: center;
+            color: #373737;
+          }
+
+          .separator {
+            color: #373737;
+            font-size: 14px;
+            line-height: 17.07px;
+            margin: 0 4px;
+          }
+        }
+      }
+
+      .button-container {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 0 16px 16px;
+        display: flex;
+        justify-content: center;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      @media (min-width: 769px) {
+        &:hover {
+          .model-name {
+            color: #EB0A1E;
+          }
+
+          .button-container {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+} 
