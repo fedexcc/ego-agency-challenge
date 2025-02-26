@@ -2,6 +2,13 @@
 @import 'variables';
 @import 'base';
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 :root {
   font-family: $font-family;
   line-height: 1.5;
