@@ -35,9 +35,7 @@ export const modelService = {
   // Get all models
   getAllModels: async (): Promise<ModelBasic[]> => {
     try {
-      console.log('Making API call to get all models...');
       const response = await axios.get(`${BASE_URL}/models/`);
-      console.log('API response for all models:', response.data);
       return response.data;
     } catch (error) {
       console.error('Error in getAllModels:', error);
@@ -48,9 +46,7 @@ export const modelService = {
   // Get model details by ID
   getModelById: async (id: number): Promise<ModelDetail> => {
     try {
-      console.log(`Making API call to get model ${id} details...`);
       const response = await axios.get(`${BASE_URL}/models/${id}/`);
-      console.log('API response for model details:', response.data);
       return response.data;
     } catch (error) {
       console.error(`Error in getModelById for id ${id}:`, error);

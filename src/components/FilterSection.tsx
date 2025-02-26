@@ -1,12 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/FilterSection.scss';
 
-const FilterSection: React.FC = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState('De menor a mayor precio');
-  const [selectedFilter, setSelectedFilter] = useState('Todos');
+interface FilterSectionProps {
+  selectedFilter: string;
+  onFilterChange: (filter: string) => void;
+  filterOptions: string[];
+  selectedOrder: string;
+  onOrderChange: (order: string) => void;
+}
+
+const orderOptions = [
+  { id: 'none', label: 'Nada', value: 'Nada' },
+  { 
+    id: 'price-asc', 
+    label: <>De <strong>menor</strong> a <strong>mayor</strong> precio</>, 
+    value: 'De menor a mayor precio'
+  },
+  { 
+    id: 'price-desc', 
+    label: <>De <strong>mayor</strong> a <strong>menor</strong> precio</>, 
+    value: 'De mayor a menor precio'
+  },
+  { 
+    id: 'year-desc', 
+    label: <>Más <strong>nuevos</strong> primero</>, 
+    value: 'Más nuevos primero'
+  },
+  { 
+    id: 'year-asc', 
+    label: <>Más <strong>viejos</strong> primero</>, 
+    value: 'Más viejos primero'
+  }
+];
+
+const FilterSection: React.FC<FilterSectionProps> = ({ 
+  selectedFilter, 
+  onFilterChange,
+  filterOptions,
+  selectedOrder,
+  onOrderChange
+}) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -18,21 +54,6 @@ const FilterSection: React.FC = () => {
 
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
-
-  const orderOptions = [
-    'Nada',
-    'De menor a mayor precio',
-    'De mayor a menor precio',
-    'Más nuevos primero',
-    'Más viejos primero'
-  ];
-
-  const filterOptions = [
-    'Todos',
-    'Autos',
-    'Pickups y Comerciales',
-    'SUVs y Crossovers'
-  ];
 
   return (
     <div className="filter-section">
@@ -54,7 +75,7 @@ const FilterSection: React.FC = () => {
                     key={option}
                     className={`dropdown-item ${selectedFilter === option ? 'active' : ''}`}
                     onClick={() => {
-                      setSelectedFilter(option);
+                      onFilterChange(option);
                       setIsFilterDropdownOpen(false);
                     }}
                   >
@@ -70,7 +91,7 @@ const FilterSection: React.FC = () => {
               <button
                 key={option}
                 className={`filter-option ${selectedFilter === option ? 'active' : ''}`}
-                onClick={() => setSelectedFilter(option)}
+                onClick={() => onFilterChange(option)}
               >
                 {option}
               </button>
@@ -91,14 +112,14 @@ const FilterSection: React.FC = () => {
             <div className="dropdown-menu">
               {orderOptions.map((option) => (
                 <button
-                  key={option}
-                  className={`dropdown-item ${selectedOrder === option ? 'active' : ''}`}
+                  key={option.id}
+                  className={`dropdown-item ${selectedOrder === option.value ? 'active' : ''}`}
                   onClick={() => {
-                    setSelectedOrder(option);
+                    onOrderChange(option.value);
                     setIsDropdownOpen(false);
                   }}
                 >
-                  {option}
+                  {option.label}
                 </button>
               ))}
             </div>

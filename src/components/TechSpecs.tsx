@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import modelService, { ModelDetail } from '../services/modelService';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/swiper-bundle.css';
 import '../styles/TechSpecs.scss';
 
 const TechSpecs: React.FC = () => {
@@ -26,9 +30,7 @@ const TechSpecs: React.FC = () => {
       }
       
       try {
-        console.log('Fetching model details for ID:', modelId);
         const data = await modelService.getModelById(modelId);
-        console.log('Received model details:', data);
         setModelDetails(data);
         setLoading(false);
       } catch (err) {
@@ -41,7 +43,7 @@ const TechSpecs: React.FC = () => {
     fetchModelDetails();
   }, [id]);
 
-  if (loading) return <div className="loading">Cargando detalles...</div>;
+  if (loading) return <div className="loading"></div>;
   if (error) return (
     <div className="error-container">
       <div className="error">{error}</div>
@@ -54,37 +56,72 @@ const TechSpecs: React.FC = () => {
 
   return (
     <div className="tech-specs-container">
-      <div className="model-header">
-        <h1>{modelDetails.name}</h1>
-        <p className="model-title">{modelDetails.title}</p>
-        <div className="model-description" dangerouslySetInnerHTML={{ __html: modelDetails.description }} />
-      </div>
-
-      <div className="features-section">
-        <h2>Características</h2>
-        <div className="features-grid">
-          {modelDetails.model_features.map((feature, index) => (
-            <div key={index} className="feature-card">
-              <div className="feature-image">
-                <img src={feature.image} alt={feature.name} />
-              </div>
-              <h3>{feature.name}</h3>
-              <p>{feature.description}</p>
-            </div>
-          ))}
+      <div className="model-hero">
+        <div className="model-image">
+          <img src={modelDetails.photo} alt={modelDetails.name} />
+        </div>
+        <div className="model-content">
+          <p className="model-name">{modelDetails.name}</p>
+          <h1 className="model-title">{modelDetails.title}</h1>
+          <div className="model-description" dangerouslySetInnerHTML={{ __html: modelDetails.description }} />
         </div>
       </div>
 
+      <div className="features-section">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          navigation={true}
+          pagination={{
+            clickable: true,
+            type: 'bullets',
+            horizontalClass: 'swiper-pagination-features',
+            renderBullet: function (index, className) {
+              return `<span class="${className}"></span>`;
+            }
+          }}
+          loop={true}
+          slidesPerGroup={1}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 24,
+              centeredSlides: true
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+              centeredSlides: false,
+              initialSlide: 0
+            }
+          }}
+          className="features-swiper"
+        >
+          {modelDetails.model_features.map((feature, index) => (
+            <SwiperSlide key={index}>
+              <div className="feature-card">
+                <div className="feature-image">
+                  <img src={feature.image} alt={feature.name} />
+                </div>
+                <h3>{feature.name}</h3>
+                <p>{feature.description}</p>
+              </div>
+            </SwiperSlide>
+          ))}
+          <div className="swiper-pagination-features"></div>
+        </Swiper>
+      </div>
+
       <div className="highlights-section">
-        <h2>Destacados</h2>
         <div className="highlights-grid">
           {modelDetails.model_highlights.map((highlight, index) => (
             <div key={index} className="highlight-card">
+              <div className="highlight-content">
+                <h3>{highlight.title}</h3>
+                <div dangerouslySetInnerHTML={{ __html: highlight.content }} />
+              </div>
               <div className="highlight-image">
                 <img src={highlight.image} alt={highlight.title} />
               </div>
-              <h3>{highlight.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: highlight.content }} />
             </div>
           ))}
         </div>
