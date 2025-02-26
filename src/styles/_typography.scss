@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 $font-family-primary: 'Montserrat', sans-serif;
 $font-weight-regular: 400;
@@ -7,5 +7,16 @@ $font-weight-semibold: 600;
 // Typography styles
 h1 {
   color: #373737;
-  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 57px;
+  letter-spacing: -1px;
+
+  @media screen and (max-width: 767px) {
+    font-family: ToyotaType;
+    font-size: 35px;
+    line-height: 44px;
+    letter-spacing: -0.7px;
+  }
 } 
